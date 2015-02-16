@@ -1,4 +1,4 @@
-Set = require "./lib/set"
+PrimitiveSet = require "./lib/primitive_set"
 
 helpers =
   fibonacci: (n) ->
@@ -28,7 +28,7 @@ helpers =
       factors.push(n)
     factors
   uniquePrimeFactorization: (n) ->
-    upf = new Set(@primeFactorization(n))
+    upf = new PrimitiveSet(@primeFactorization(n))
     upf.values()
 
 module.exports = helpers

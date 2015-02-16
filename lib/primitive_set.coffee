@@ -1,5 +1,5 @@
-# Naive set implementation that supports primitive values.
-class Set
+# Naive set implementation that only supports primitive values.
+class PrimitiveSet
   elements: {}
 
   constructor: (@items) ->
@@ -31,4 +31,4 @@ class Set
     # Return an array that contains the values for each element in the set
     Object.keys(@elements)
 
-module.exports = Set
+module.exports = PrimitiveSet
