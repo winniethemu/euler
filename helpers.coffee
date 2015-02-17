@@ -15,6 +15,25 @@ helpers =
         fibonacci.push(lastTerm + secondLastTerm)
         n -= 1
       return fibonacci
+  isPrime: (n) ->
+    return true if n is 2 or n is 3
+    for i in [2..Math.floor(Math.sqrt(n))]
+      return false if n % i is 0
+    true
+  leastCommonMultiple: (values...) ->
+    lcm = 1
+    pfs = {} # All factorizations
+    factors = []
+    for value in values
+      pfs[value] = @primeFactorization(value)
+      factors = factors.concat(Object.keys(pfs[value]))
+    uniqueFactors = new PrimitiveSet(factors)
+    for factor in uniqueFactors.values()
+      max = 1
+      for k, v of pfs
+        max = v[factor] if v[factor] and v[factor] > max
+      lcm *= Math.pow(factor, max)
+    lcm
   primeFactorization: (n) ->
     result = {}
     f = 2
@@ -32,19 +51,11 @@ helpers =
       else
         result[n] = 1
     result
-  leastCommonMultiple: (values...) ->
-    lcm = 1
-    pfs = {} # All factorizations
-    factors = []
-    for value in values
-      pfs[value] = @primeFactorization(value)
-      factors = factors.concat(Object.keys(pfs[value]))
-    uniqueFactors = new PrimitiveSet(factors)
-    for factor in uniqueFactors.values()
-      max = 1
-      for k, v of pfs
-        max = v[factor] if v[factor] and v[factor] > max
-      lcm *= Math.pow(factor, max)
-    lcm
+  primes: ->
+    n = 1
+    loop
+      n += 1
+      yield n if @isPrime(n)
+    return
 
 module.exports = helpers
