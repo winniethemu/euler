@@ -1,3 +1,5 @@
+PrimitiveSet = require "./lib/primitive_set"
+
 helpers =
   fibonacci: (n) ->
     # Return the first N Fibonacci numbers starting with 1 and 2
@@ -30,5 +32,19 @@ helpers =
       else
         result[n] = 1
     result
+  leastCommonMultiple: (values...) ->
+    lcm = 1
+    pfs = {} # All factorizations
+    factors = []
+    for value in values
+      pfs[value] = @primeFactorization(value)
+      factors = factors.concat(Object.keys(pfs[value]))
+    uniqueFactors = new PrimitiveSet(factors)
+    for factor in uniqueFactors.values()
+      max = 1
+      for k, v of pfs
+        max = v[factor] if v[factor] and v[factor] > max
+      lcm *= Math.pow(factor, max)
+    lcm
 
 module.exports = helpers
