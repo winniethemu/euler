@@ -1,5 +1,3 @@
-PrimitiveSet = require "./lib/primitive_set"
-
 helpers =
   fibonacci: (n) ->
     # Return the first N Fibonacci numbers starting with 1 and 2
@@ -16,19 +14,21 @@ helpers =
         n -= 1
       return fibonacci
   primeFactorization: (n) ->
-    # Return the prime factors of n as an array
-    factors = []
+    result = {}
     f = 2
     while f * f <= n
       while n % f is 0
-        factors.push(f)
+        if result.hasOwnProperty(f)
+          result[f] += 1
+        else
+          result[f] = 1
         n = Math.floor(n / f)
       f += 1
     if n > 1
-      factors.push(n)
-    factors
-  uniquePrimeFactorization: (n) ->
-    upf = new PrimitiveSet(@primeFactorization(n))
-    upf.values()
+      if result.hasOwnProperty(n)
+        result[n] += 1
+      else
+        result[n] = 1
+    result
 
 module.exports = helpers

@@ -1,6 +1,8 @@
 Helpers = require "./helpers"
 
-upf = Helpers.uniquePrimeFactorization(600851475143)
-console.log upf[upf.length - 1]
+pf = Helpers.primeFactorization(600851475143)
+factors = Object.keys(pf)
+answer = factors[factors.length - 1]
+console.log answer
 
-module.exports = upf
+module.exports = answer
