@@ -31,4 +31,17 @@ class BigNum
     sum.push(1) if carry
     new BigNum(sum.reverse().join(""))
 
+  times: (num) ->
+    false
+
+  base10: ->
+    # "202" -> { '1': '2', '10': '0', '100': '2' }
+    obj = {}
+    for i in [0..@value.length - 1]
+      exponent = "1"
+      exponent += "0" for [0..@value.length - 1 - i]
+      exponent = exponent.substring(0, exponent.length - 1)
+      obj[exponent] = @value.charAt(i)
+    obj
+
 module.exports = BigNum
