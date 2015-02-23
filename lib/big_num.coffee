@@ -26,6 +26,7 @@ class BigNum
       else
         carry = 0
       sum.push(digitSum % 10)
+    sum.push(1) if carry
     new BigNum(sum.reverse().join(""))
 
 module.exports = BigNum
