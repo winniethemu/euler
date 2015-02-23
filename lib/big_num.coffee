@@ -2,6 +2,8 @@ class BigNum
   digits = []
 
   constructor: (@value) ->
+    unless @value
+      throw new Error("Invalid amount")
     @digits = @value.split("")
 
   add: (num) ->
