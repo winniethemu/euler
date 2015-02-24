@@ -57,5 +57,10 @@ helpers =
       n += 1
       yield n if @isPrime(n)
     return
+  properDivisors: (n) ->
+    pd = []
+    for i in [1..Math.floor(n / 2)]
+      pd.push(i) if n % i is 0
+    pd
 
 module.exports = helpers
