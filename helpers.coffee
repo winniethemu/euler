@@ -34,6 +34,21 @@ helpers =
         max = v[factor] if v[factor] and v[factor] > max
       lcm *= Math.pow(factor, max)
     lcm
+  permutations: (items) ->
+    # Generate all permutations in lexicographic order
+    items = items.split("") if typeof items is "string"
+    unless Array.isArray(items)
+      throw "Error: Must supply either an array or a string."
+    @permute [], items
+  permute: (prefix, items) ->
+    if items.length is 0
+      console.log prefix
+      return
+    for item in items
+      index = items.indexOf(item)
+      items.splice(index, 1)
+      prefix.push(item)
+      @permute(prefix, items)
   primeFactorization: (n) ->
     result = {}
     f = 2
