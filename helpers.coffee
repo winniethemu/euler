@@ -42,13 +42,14 @@ helpers =
     @permute [], items
   permute: (prefix, items) ->
     if items.length is 0
-      console.log prefix
-      return
+      return prefix
     for item in items
       index = items.indexOf(item)
-      items.splice(index, 1)
-      prefix.push(item)
-      @permute(prefix, items)
+      _prefix = prefix.slice()
+      _prefix.push(item)
+      _items = items.slice()
+      _items.splice(index, 1)
+      @permute(_prefix, _items)
   primeFactorization: (n) ->
     result = {}
     f = 2
