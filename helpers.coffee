@@ -39,10 +39,10 @@ helpers =
     items = items.split("") if typeof items is "string"
     unless Array.isArray(items)
       throw "Error: Must supply either an array or a string."
-    @permute [], items
+    return @permute([], items)
   permute: (prefix, items) ->
     if items.length is 0
-      return prefix
+      console.log prefix
     for item in items
       index = items.indexOf(item)
       _prefix = prefix.slice()
@@ -50,6 +50,7 @@ helpers =
       _items = items.slice()
       _items.splice(index, 1)
       @permute(_prefix, _items)
+    return
   primeFactorization: (n) ->
     result = {}
     f = 2
