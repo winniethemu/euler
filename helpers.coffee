@@ -1,4 +1,5 @@
 PrimitiveSet = require "./lib/primitive_set"
+BigNum = require "./lib/big_num"
 
 helpers =
   fibonacci: (n) ->
@@ -15,6 +16,12 @@ helpers =
         fibonacci.push(lastTerm + secondLastTerm)
         n -= 1
       return fibonacci
+  genFibonacci: (a, b) ->
+    if typeof a isnt "object" or typeof b isnt "object"
+      throw "Error: Invalid param type."
+    sum = a.add(b)
+    yield sum.value
+    `yield* this.genFibonacci(b, sum)`
   isPrime: (n) ->
     return true if n is 2 or n is 3
     for i in [2..Math.floor(Math.sqrt(n))]
